@@ -1,4 +1,4 @@
-package com.stripe.interview;
+package com.stripe.interview.triage;
 
 import org.junit.Test;
 
@@ -12,8 +12,8 @@ import static org.junit.Assert.assertThrows;
 
 public class MeetingScheduler2Test {
 
-    private static List<Room> initRooms() {
-        Room r = new Room();
+    private static List<com.stripe.interview.triage.Room> initRooms() {
+        com.stripe.interview.triage.Room r = new com.stripe.interview.triage.Room();
         r.schedules = new TreeMap<>();
         r.capacity = 1;
         r.roomId = "r1";
@@ -27,11 +27,11 @@ public class MeetingScheduler2Test {
         underTest.rooms = initRooms();
         underTest.ledger = new ArrayList<>();
 
-        User user = new User();
+        com.stripe.interview.triage.User user = new com.stripe.interview.triage.User();
         user.name = "u1";
         user.userId = "u1";
 
-        assertEquals(initRooms().get(0).roomId, underTest.schedule(1, 2, List.of(user), new BestFit()).room.roomId);
-        assertThrows(NoSuchElementException.class, () -> underTest.schedule(1, 2, List.of(user), new BestFit()));
+        assertEquals(initRooms().get(0).roomId, underTest.schedule(1, 2, List.of(user), new com.stripe.interview.triage.BestFit()).room.roomId);
+        assertThrows(NoSuchElementException.class, () -> underTest.schedule(1, 2, List.of(user), new com.stripe.interview.triage.BestFit()));
     }
 }

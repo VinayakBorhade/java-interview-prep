@@ -1,4 +1,4 @@
-package com.stripe.interview;
+package com.stripe.interview.triage;
 
 
 import java.util.*;

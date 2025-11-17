@@ -1,6 +1,5 @@
 package com.stripe.interview;
 
-import org.checkerframework.checker.units.qual.A;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

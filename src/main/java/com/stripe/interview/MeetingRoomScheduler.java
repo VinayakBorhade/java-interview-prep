@@ -69,7 +69,7 @@ class Meeting {
 interface AllocationStrategy {
 
     default List<Room> filterRooms(List<Room> rooms, TreeMap<String, TreeMap<Integer, Integer>> roomToBooking,
-                                   Integer startTime, Integer endTime, List<Amenity> amenities, Integer capacity) {
+                                                               Integer startTime, Integer endTime, List<Amenity> amenities, Integer capacity) {
         List<Room> filteredRooms = rooms.stream()
                 .filter(room -> amenities.containsAll(room.amenities) && room.capacity <= capacity)
                 .collect(Collectors.toList());
@@ -82,13 +82,13 @@ interface AllocationStrategy {
     }
 
     Room allocate(List<Room> rooms, TreeMap<String, TreeMap<Integer, Integer>> roomToBooking,
-                    Integer startTime, Integer endTime, List<Amenity> amenities, Integer capacity);
+                                              Integer startTime, Integer endTime, List<Amenity> amenities, Integer capacity);
 }
 
 class BestFit implements AllocationStrategy {
     @Override
     public Room allocate(List<Room> rooms, TreeMap<String, TreeMap<Integer, Integer>> roomToBooking,
-                         Integer startTime, Integer endTime, List<Amenity> amenities, Integer capacity) {
+                                                     Integer startTime, Integer endTime, List<Amenity> amenities, Integer capacity) {
         return filterRooms(rooms, roomToBooking, startTime, endTime, amenities, capacity)
                 .stream()
                 .min(Comparator.comparingInt(r -> r.capacity))
@@ -100,7 +100,7 @@ class BestFit implements AllocationStrategy {
 class WorstFit implements AllocationStrategy {
     @Override
     public Room allocate(List<Room> rooms, TreeMap<String, TreeMap<Integer, Integer>> roomToBooking,
-                           Integer startTime, Integer endTime, List<Amenity> amenities, Integer capacity) {
+                                                     Integer startTime, Integer endTime, List<Amenity> amenities, Integer capacity) {
         return filterRooms(rooms, roomToBooking, startTime, endTime, amenities, capacity)
                 .stream()
                 .max(Comparator.comparingInt(r -> r.capacity))
@@ -111,7 +111,7 @@ class WorstFit implements AllocationStrategy {
 class FirstFit implements AllocationStrategy {
     @Override
     public Room allocate(List<Room> rooms, TreeMap<String, TreeMap<Integer, Integer>> roomToBooking,
-                           Integer startTime, Integer endTime, List<Amenity> amenities, Integer capacity) {
+                                                     Integer startTime, Integer endTime, List<Amenity> amenities, Integer capacity) {
         return filterRooms(rooms, roomToBooking, startTime, endTime, amenities, capacity)
                 .stream()
                 .findFirst()
@@ -135,7 +135,7 @@ public class MeetingRoomScheduler {
      * @return - room no
      */
     public Meeting schedule(List<User> users, Integer startTime, Integer endTime, List<Amenity> amenities,
-                           AllocationStrategy allocationStrategy) {
+                                                        AllocationStrategy allocationStrategy) {
         // load all rooms and filter amenities and timings from their schedules
         // strategy to return the list of favourable room
 //        List<Room> filteredRooms = rooms.stream().filter(room -> amenities.containsAll(room.amenities))
